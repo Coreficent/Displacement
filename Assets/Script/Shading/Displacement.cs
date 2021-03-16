@@ -49,6 +49,14 @@
             material.SetVector("_Disturbance2", disturbance[1].MakeShaderParameter(camera.aspect));
             material.SetVector("_Disturbance3", disturbance[2].MakeShaderParameter(camera.aspect));
 
+
+            Vector4[] values = new Vector4[3];
+            values[0] = disturbance[0].MakeShaderParameter(camera.aspect);
+            values[1] = disturbance[1].MakeShaderParameter(camera.aspect);
+            values[2] = disturbance[2].MakeShaderParameter(camera.aspect);
+
+            material.SetVectorArray("_Disturbance", values);
+
             material.SetColor("_Reflection", reflectionColor);
             material.SetVector("_Params1", new Vector4(camera.aspect, 1, 1 / waveSpeed, 0));
             material.SetVector("_Params2", new Vector4(1, 1 / camera.aspect, refractionStrength, reflectionStrength));

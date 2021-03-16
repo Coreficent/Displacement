@@ -16,6 +16,8 @@ float3 _Disturbance1;
 float3 _Disturbance2;
 float3 _Disturbance3;
 
+float4 _Disturbance[3];
+
 float wave(float2 position, float2 origin, float time)
 {
 	float d = length(position - origin);
@@ -26,9 +28,9 @@ float wave(float2 position, float2 origin, float time)
 float allwave(float2 position)
 {
 	return
-		wave(position, _Disturbance1.xy, _Disturbance1.z) +
-		wave(position, _Disturbance2.xy, _Disturbance2.z) +
-		wave(position, _Disturbance3.xy, _Disturbance3.z);
+		wave(position, _Disturbance[0].xy, _Disturbance[0].z) +
+		wave(position, _Disturbance[1].xy, _Disturbance[1].z) +
+		wave(position, _Disturbance[2].xy, _Disturbance[2].z);
 }
 
 half4 frag(v2f_img i) : SV_Target
