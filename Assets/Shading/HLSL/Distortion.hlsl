@@ -12,10 +12,6 @@ half4 _Reflection;
 float4 _Params1;    // [ aspect, 1, scale, 0 ]
 float4 _Params2;    // [ 1, 1/aspect, refraction, reflection ]
 
-float3 _Disturbance1;
-float3 _Disturbance2;
-float3 _Disturbance3;
-
 float4 _Disturbance[3];
 
 float wave(float2 position, float2 origin, float time)

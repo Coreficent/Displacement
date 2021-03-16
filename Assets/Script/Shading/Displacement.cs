@@ -45,11 +45,6 @@
         {
             var camera = GetComponent<Camera>();
 
-            material.SetVector("_Disturbance1", disturbance[0].MakeShaderParameter(camera.aspect));
-            material.SetVector("_Disturbance2", disturbance[1].MakeShaderParameter(camera.aspect));
-            material.SetVector("_Disturbance3", disturbance[2].MakeShaderParameter(camera.aspect));
-
-
             Vector4[] values = new Vector4[3];
             values[0] = disturbance[0].MakeShaderParameter(camera.aspect);
             values[1] = disturbance[1].MakeShaderParameter(camera.aspect);
