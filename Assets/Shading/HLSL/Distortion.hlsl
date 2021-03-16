@@ -12,9 +12,9 @@ half4 _Reflection;
 float4 _Params1;    // [ aspect, 1, scale, 0 ]
 float4 _Params2;    // [ 1, 1/aspect, refraction, reflection ]
 
-float3 _Drop1;
-float3 _Drop2;
-float3 _Drop3;
+float3 _Disturbance1;
+float3 _Disturbance2;
+float3 _Disturbance3;
 
 float wave(float2 position, float2 origin, float time)
 {
@@ -26,9 +26,9 @@ float wave(float2 position, float2 origin, float time)
 float allwave(float2 position)
 {
 	return
-		wave(position, _Drop1.xy, _Drop1.z) +
-		wave(position, _Drop2.xy, _Drop2.z) +
-		wave(position, _Drop3.xy, _Drop3.z);
+		wave(position, _Disturbance1.xy, _Disturbance1.z) +
+		wave(position, _Disturbance2.xy, _Disturbance2.z) +
+		wave(position, _Disturbance3.xy, _Disturbance3.z);
 }
 
 half4 frag(v2f_img i) : SV_Target

@@ -30,24 +30,24 @@
         public float waveSpeed = 1.25f;
 
         [Range(0.0f, 2.0f)]
-        public float dropInterval = 0.5f;
+        public float interval = 0.5f;
 
         [SerializeField]
         Shader shader;
 
-        Disturbance[] droplets;
+        Disturbance[] disturbance;
         Texture2D gradTexture;
         Material material;
         float timer;
-        int dropCount;
+        int count;
 
         void UpdateShaderParameters()
         {
             var camera = GetComponent<Camera>();
 
-            material.SetVector("_Drop1", droplets[0].MakeShaderParameter(camera.aspect));
-            material.SetVector("_Drop2", droplets[1].MakeShaderParameter(camera.aspect));
-            material.SetVector("_Drop3", droplets[2].MakeShaderParameter(camera.aspect));
+            material.SetVector("_Disturbance1", disturbance[0].MakeShaderParameter(camera.aspect));
+            material.SetVector("_Disturbance2", disturbance[1].MakeShaderParameter(camera.aspect));
+            material.SetVector("_Disturbance3", disturbance[2].MakeShaderParameter(camera.aspect));
 
             material.SetColor("_Reflection", reflectionColor);
             material.SetVector("_Params1", new Vector4(camera.aspect, 1, 1 / waveSpeed, 0));
@@ -56,10 +56,10 @@
 
         void Awake()
         {
-            droplets = new Disturbance[3];
-            droplets[0] = new Disturbance();
-            droplets[1] = new Disturbance();
-            droplets[2] = new Disturbance();
+            disturbance = new Disturbance[3];
+            disturbance[0] = new Disturbance();
+            disturbance[1] = new Disturbance();
+            disturbance[2] = new Disturbance();
 
             gradTexture = new Texture2D(2048, 1, TextureFormat.Alpha8, false);
             gradTexture.wrapMode = TextureWrapMode.Clamp;
@@ -81,17 +81,17 @@
 
         void Update()
         {
-            if (dropInterval > 0)
+            if (interval > 0)
             {
                 timer += Time.deltaTime;
-                while (timer > dropInterval)
+                while (timer > interval)
                 {
                     Emit();
-                    timer -= dropInterval;
+                    timer -= interval;
                 }
             }
 
-            foreach (var d in droplets) d.Update();
+            foreach (var d in disturbance) d.Update();
 
             UpdateShaderParameters();
         }
@@ -103,7 +103,7 @@
 
         public void Emit()
         {
-            droplets[dropCount++ % droplets.Length].Reset();
+            disturbance[count++ % disturbance.Length].Reset();
         }
     }
 }
