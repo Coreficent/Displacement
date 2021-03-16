@@ -43,15 +43,15 @@
 
         void UpdateShaderParameters()
         {
-            var c = GetComponent<Camera>();
+            var camera = GetComponent<Camera>();
 
-            material.SetVector("_Drop1", droplets[0].MakeShaderParameter(c.aspect));
-            material.SetVector("_Drop2", droplets[1].MakeShaderParameter(c.aspect));
-            material.SetVector("_Drop3", droplets[2].MakeShaderParameter(c.aspect));
+            material.SetVector("_Drop1", droplets[0].MakeShaderParameter(camera.aspect));
+            material.SetVector("_Drop2", droplets[1].MakeShaderParameter(camera.aspect));
+            material.SetVector("_Drop3", droplets[2].MakeShaderParameter(camera.aspect));
 
             material.SetColor("_Reflection", reflectionColor);
-            material.SetVector("_Params1", new Vector4(c.aspect, 1, 1 / waveSpeed, 0));
-            material.SetVector("_Params2", new Vector4(1, 1 / c.aspect, refractionStrength, reflectionStrength));
+            material.SetVector("_Params1", new Vector4(camera.aspect, 1, 1 / waveSpeed, 0));
+            material.SetVector("_Params2", new Vector4(1, 1 / camera.aspect, refractionStrength, reflectionStrength));
         }
 
         void Awake()

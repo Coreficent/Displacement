@@ -16,7 +16,8 @@
 
         public void Reset()
         {
-            position = new Vector2(Random.value, Random.value);
+            Vector3 mousePos = Input.mousePosition;
+            position = new Vector2(mousePos.x / Screen.width, mousePos.y / Screen.height);
             time = 0;
         }
 
