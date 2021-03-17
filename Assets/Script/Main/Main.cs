@@ -1,5 +1,6 @@
 ﻿namespace Coreficent.Main
 {
+    using Coreficent.Controller;
     using Coreficent.Shading;
     using Coreficent.Utility;
     using System.Collections.Generic;
@@ -18,7 +19,6 @@
         [Range(0.01f, 3.0f)]
         public float waveSpeed = 1.25f;
 
-        private float interval = 0.05f;
 
         [SerializeField]
         Shader shader;
@@ -28,8 +28,9 @@
 
         Texture2D gradient;
         Material material;
-        float timer;
         int count;
+
+        private StepController stepController = new StepController();
 
         Vector3 lastMousePosition;
 
@@ -85,17 +86,17 @@
 
         void Update()
         {
-            if (interval > 0)
+            stepController.Update();
+            while (stepController.HasNext())
             {
-                timer += Time.deltaTime;
-                while (timer > interval)
-                {
-                    Emit();
-                    timer -= interval;
-                }
+                Emit();
+                stepController.Next();
             }
 
-            foreach (var d in disturbances) d.Update();
+            foreach (var d in disturbances)
+            {
+                d.Update();
+            }
 
             UpdateShaderParameters();
         }
