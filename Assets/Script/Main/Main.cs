@@ -17,12 +17,12 @@
         private readonly float waveSpeed = 0.25f;
         private readonly float reflectionStrength = 0.15f;
 
+        private List<Disturbance> disturbances = new List<Disturbance>();
         private readonly int disturbanceCount = 64;
         private int disturbanceIndex = 0;
         private float waveStrength = 0.5f;
 
         private readonly StepController stepController = new StepController();
-        private List<Disturbance> disturbances = new List<Disturbance>();
         private readonly MouseController mouseController = new MouseController();
 
         private Texture2D gradient;
