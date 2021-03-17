@@ -1,11 +1,10 @@
 ﻿namespace Coreficent.Interface
 {
-    using Coreficent.Main;
     using Coreficent.Utility;
     using UnityEngine;
 
 
-    public class InterfaceControl : MonoBehaviour
+    public class InterfaceControl : ReinforcedBehavior
     {
 
         public void Render()
