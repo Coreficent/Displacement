@@ -17,10 +17,13 @@
             switch (waveType)
             {
                 case "DeminishingSine":
-                    Main.UpdateParameters(wave.DiminishingSineWave);
+                    Main.UpdateParameters(wave.DiminishingSine);
                     break;
                 case "Linear":
-                    Main.UpdateParameters(wave.LinearWave);
+                    Main.UpdateParameters(wave.Linear);
+                    break;
+                case "Constant":
+                    Main.UpdateParameters(wave.Constant);
                     break;
                 default:
                     DebugUtility.Warn("unexpected wave type");

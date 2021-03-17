@@ -7,6 +7,8 @@
 
     public class Main : ReinforcedBehavior
     {
+        public AnimationCurve Temp;
+
 
         [Range(0.01f, 1.0f)]
         public float refractionStrength = 0.5f;
@@ -59,10 +61,10 @@
 
         protected override void Awake()
         {
-            UpdateParameters(wave.DiminishingSineWave);
+            UpdateParameters(wave.DiminishingSine);
         }
 
-        public void UpdateParameters(AnimationCurve waveType)
+        public void UpdateParameters(AnimationCurve wave)
         {
             disturbances.Clear();
 
@@ -74,11 +76,11 @@
             gradient = new Texture2D(2048, 1, TextureFormat.Alpha8, false);
             gradient.wrapMode = TextureWrapMode.Clamp;
             gradient.filterMode = FilterMode.Bilinear;
-            for (var i = 0; i < gradient.width; i++)
+            for (var i = 0; i < gradient.width; ++i)
             {
-                var x = 1.0f / gradient.width * i;
-                var a = waveType.Evaluate(x);
-                gradient.SetPixel(i, 0, new Color(a, a, a, a));
+                float positionX = 1.0f / gradient.width * i;
+                float positionY = wave.Evaluate(positionX);
+                gradient.SetPixel(i, 0, new Color(positionY, positionY, positionY, positionY));
             }
             gradient.Apply();
 

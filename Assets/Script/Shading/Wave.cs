@@ -5,7 +5,7 @@
 
     public class Wave
     {
-        public AnimationCurve DiminishingSineWave = new AnimationCurve(
+        public AnimationCurve DiminishingSine = new AnimationCurve(
             new Keyframe(0.00f, 0.50f, 0, 0),
             new Keyframe(0.05f, 1.00f, 0, 0),
             new Keyframe(0.15f, 0.10f, 0, 0),
@@ -19,8 +19,13 @@
             new Keyframe(0.99f, 0.50f, 0, 0)
         );
 
-        public AnimationCurve LinearWave = new AnimationCurve(
+        public AnimationCurve Linear = new AnimationCurve(
             new Keyframe(0.0f, 0.0f, 0, 0),
+            new Keyframe(1.0f, 1.0f, 0, 0)
+            );
+
+        public AnimationCurve Constant = new AnimationCurve(
+            new Keyframe(1.0f, 1.0f, 0, 0),
             new Keyframe(1.0f, 1.0f, 0, 0)
             );
     }
