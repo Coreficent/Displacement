@@ -1,5 +1,6 @@
 ﻿namespace Coreficent.Shading
 {
+    using System.Collections.Generic;
     using UnityEngine;
 
     public class Displacement : MonoBehaviour
@@ -35,7 +36,7 @@
         [SerializeField]
         Shader shader;
 
-        Disturbance[] disturbance;
+        List<Disturbance> disturbances = new List<Disturbance>();
         Texture2D gradTexture;
         Material material;
         float timer;
@@ -45,12 +46,14 @@
         {
             var camera = GetComponent<Camera>();
 
-            Vector4[] values = new Vector4[3];
-            values[0] = disturbance[0].MakeShaderParameter(camera.aspect);
-            values[1] = disturbance[1].MakeShaderParameter(camera.aspect);
-            values[2] = disturbance[2].MakeShaderParameter(camera.aspect);
+            List<Vector4> buffer = new List<Vector4>();
+            foreach (var disturbance in disturbances)
+            {
+                buffer.Add(disturbance.MakeShaderParameter(camera.aspect));
+            }
 
-            material.SetVectorArray("_Disturbance", values);
+            material.SetInt("_DisturbanceCount", buffer.Count);
+            material.SetVectorArray("_Disturbance", buffer);
 
             material.SetColor("_Reflection", reflectionColor);
             material.SetVector("_Params1", new Vector4(camera.aspect, 1, 1 / waveSpeed, 0));
@@ -59,10 +62,9 @@
 
         void Awake()
         {
-            disturbance = new Disturbance[3];
-            disturbance[0] = new Disturbance();
-            disturbance[1] = new Disturbance();
-            disturbance[2] = new Disturbance();
+            disturbances.Add(new Disturbance());
+            disturbances.Add(new Disturbance());
+            disturbances.Add(new Disturbance());
 
             gradTexture = new Texture2D(2048, 1, TextureFormat.Alpha8, false);
             gradTexture.wrapMode = TextureWrapMode.Clamp;
@@ -94,7 +96,7 @@
                 }
             }
 
-            foreach (var d in disturbance) d.Update();
+            foreach (var d in disturbances) d.Update();
 
             UpdateShaderParameters();
         }
@@ -106,7 +108,7 @@
 
         public void Emit()
         {
-            disturbance[count++ % disturbance.Length].Reset();
+            disturbances[count++ % disturbances.Count].Reset();
         }
     }
 }

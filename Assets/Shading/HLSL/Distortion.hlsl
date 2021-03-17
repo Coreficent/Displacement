@@ -13,7 +13,8 @@ float4 _Params1;    // [ aspect, 1, scale, 0 ]
 float4 _Params2;    // [ 1, 1/aspect, refraction, reflection ]
 
 
-float4 _Disturbance[3];
+int _DisturbanceCount;
+float4 _Disturbance[32];
 
 float wave(float2 position, float2 origin, float time)
 {
@@ -26,7 +27,7 @@ float allwave(float2 position)
 {
 	float result = 0.0;
 
-	for (int i = 0; i < 3; ++i)
+	for (int i = 0; i < _DisturbanceCount; ++i)
 	{
 		result += wave(position, _Disturbance[i].xy, _Disturbance[i].z);
 	}
