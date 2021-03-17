@@ -8,7 +8,6 @@ float2 _MainTex_TexelSize;
 
 sampler2D _GradientTex;
 
-half4 _Reflection;
 float _Aspect;
 float _Strength;
 
@@ -37,7 +36,7 @@ float concat(float2 position)
 
 half4 frag(v2f_img i) : SV_Target
 {
-	float2 position = i.uv * float2(_Aspect, 1);
+	float2 position = i.uv * float2(_Aspect, 1.0f);
 
 	float distortion = concat(position);
 
@@ -50,7 +49,7 @@ half4 frag(v2f_img i) : SV_Target
 	float reflection = 0.15f;
 	float finalDistance = pow(length(derivedDistortion) * 2.0f * reflection, 2.0f);
 
-	return lerp(color, _Reflection, finalDistance);
+	return lerp(color, half4(0.5, 0.5, 0.5, 0.1), finalDistance);
 }
 
 #endif

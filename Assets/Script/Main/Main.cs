@@ -99,7 +99,6 @@
             material.SetInt("_DisturbanceCount", buffer.Count);
             material.SetVectorArray("_Disturbances", buffer);
 
-            material.SetColor("_Reflection", Color.gray);
             material.SetFloat("_Aspect", mainCamera.aspect);
             material.SetFloat("_Strength", waveStrength);
         }
