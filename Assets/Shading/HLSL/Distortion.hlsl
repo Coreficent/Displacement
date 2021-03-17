@@ -44,8 +44,8 @@ half4 frag(v2f_img i) : SV_Target
 	const float2 derivedY = float2(0, 0.01f);
 	float2 derivedDistortion = float2(concat(position + derivedX) - distortion, concat(position + derivedY) - distortion);
 
-	float2 duv = derivedDistortion * _Strength.xy * 0.2f * _Strength.z;
-	half4 color = tex2D(_MainTex, i.uv + duv);
+	float2 derivedUV = derivedDistortion * _Strength.xy * 0.2f * _Strength.z;
+	half4 color = tex2D(_MainTex, i.uv + derivedUV);
 	float finalDistance = pow(length(derivedDistortion) * 3 * _Strength.w, 3);
 
 	return lerp(color, _Reflection, finalDistance);

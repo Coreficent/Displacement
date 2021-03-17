@@ -11,7 +11,6 @@
 
         public Slider WaveStrength;
 
-
         private readonly Wave wave = new Wave();
 
         public void OnSelectWave(string waveType)
@@ -49,7 +48,7 @@
                     break;
             }
         }
-
+        
         public void OnSlide()
         {
             Main.WaveStrength = WaveStrength.value;
