@@ -28,31 +28,40 @@
         private Texture2D gradient;
         private Material material;
 
-
         public float WaveStrength
         {
             set { waveStrength = value; }
         }
 
-        void UpdateShaderParameters()
-        {
-            List<Vector4> buffer = new List<Vector4>();
-            foreach (var disturbance in disturbances)
-            {
-                buffer.Add(disturbance.CalculateShade(mainCamera.aspect));
-            }
-
-            material.SetInt("_DisturbanceCount", buffer.Count);
-            material.SetVectorArray("_Disturbance", buffer);
-
-            material.SetColor("_Reflection", Color.gray);
-            material.SetVector("_Speed", new Vector4(mainCamera.aspect, 1, 1 / waveSpeed, 0));
-            material.SetVector("_Strength", new Vector4(1, 1 / mainCamera.aspect, waveStrength, reflectionStrength));
-        }
-
         protected override void Awake()
         {
             UpdateParameters(new Wave().DiminishingSine);
+        }
+
+        protected void Update()
+        {
+            while (stepController.HasNext())
+            {
+                if (mouseController.MouseChanged())
+                {
+                    disturbances[disturbanceIndex++ % disturbances.Count].Reset();
+                }
+                stepController.Next();
+            }
+
+            foreach (var disturbance in disturbances)
+            {
+                disturbance.Update();
+            }
+
+            stepController.Update();
+            mouseController.Update();
+            UpdateShaderParameters();
+        }
+
+        private void OnRenderImage(RenderTexture source, RenderTexture destination)
+        {
+            Graphics.Blit(source, destination, material);
         }
 
         public void UpdateParameters(AnimationCurve wave)
@@ -82,30 +91,20 @@
             UpdateShaderParameters();
         }
 
-        void Update()
+        private void UpdateShaderParameters()
         {
-            while (stepController.HasNext())
-            {
-                if (mouseController.MouseChanged())
-                {
-                    disturbances[disturbanceIndex++ % disturbances.Count].Reset();
-                }
-                stepController.Next();
-            }
-
+            List<Vector4> buffer = new List<Vector4>();
             foreach (var disturbance in disturbances)
             {
-                disturbance.Update();
+                buffer.Add(disturbance.CalculateShade(mainCamera.aspect));
             }
 
-            stepController.Update();
-            mouseController.Update();
-            UpdateShaderParameters();
-        }
+            material.SetInt("_DisturbanceCount", buffer.Count);
+            material.SetVectorArray("_Disturbance", buffer);
 
-        void OnRenderImage(RenderTexture source, RenderTexture destination)
-        {
-            Graphics.Blit(source, destination, material);
+            material.SetColor("_Reflection", Color.gray);
+            material.SetVector("_Speed", new Vector4(mainCamera.aspect, 1, 1 / waveSpeed, 0));
+            material.SetVector("_Strength", new Vector4(1, 1 / mainCamera.aspect, waveStrength, reflectionStrength));
         }
     }
 }
