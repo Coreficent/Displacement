@@ -14,19 +14,18 @@
         [SerializeField]
         private Camera mainCamera;
 
-        private readonly float waveSpeed = 1.25f;
+        private readonly float waveSpeed = 0.25f;
         private readonly float reflectionStrength = 0.2f;
 
         private int disturbanceCount = 64;
         private int count;
         private float waveStrength = 0.5f;
 
-        private Vector3 lastMousePosition;
-
         private Texture2D gradient;
         private StepController stepController = new StepController();
         private Material material;
         private List<Disturbance> disturbances = new List<Disturbance>();
+        private readonly MouseController mouseController = new MouseController();
 
         public float WaveStrength
         {
@@ -86,7 +85,11 @@
             stepController.Update();
             while (stepController.HasNext())
             {
-                Emit();
+                if (mouseController.MouseChanged())
+                {
+                    disturbances[count++ % disturbances.Count].Reset();
+                    mouseController.Update();
+                }
                 stepController.Next();
             }
 
@@ -101,15 +104,6 @@
         void OnRenderImage(RenderTexture source, RenderTexture destination)
         {
             Graphics.Blit(source, destination, material);
-        }
-
-        public void Emit()
-        {
-            if (Input.mousePosition != lastMousePosition)
-            {
-                disturbances[count++ % disturbances.Count].Reset();
-            }
-            lastMousePosition = Input.mousePosition;
         }
     }
 }
