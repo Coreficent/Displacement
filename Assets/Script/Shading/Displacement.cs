@@ -27,7 +27,7 @@
         [Range(0.01f, 1.0f)]
         public float reflectionStrength = 0.7f;
 
-        [Range(1.0f, 3.0f)]
+        [Range(0.01f, 3.0f)]
         public float waveSpeed = 1.25f;
 
         [Range(0.0f, 2.0f)]
@@ -37,6 +37,8 @@
         Shader shader;
 
         List<Disturbance> disturbances = new List<Disturbance>();
+        int disturbanceCount = 32;
+
         Texture2D gradTexture;
         Material material;
         float timer;
@@ -62,9 +64,10 @@
 
         void Awake()
         {
-            disturbances.Add(new Disturbance());
-            disturbances.Add(new Disturbance());
-            disturbances.Add(new Disturbance());
+            for (var i = 0; i < disturbanceCount; ++i)
+            {
+                disturbances.Add(new Disturbance());
+            }
 
             gradTexture = new Texture2D(2048, 1, TextureFormat.Alpha8, false);
             gradTexture.wrapMode = TextureWrapMode.Clamp;
