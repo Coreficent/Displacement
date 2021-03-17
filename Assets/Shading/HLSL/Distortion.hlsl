@@ -14,7 +14,7 @@ float4 _Params2;    // [ 1, 1/aspect, refraction, reflection ]
 
 
 int _DisturbanceCount;
-float4 _Disturbance[32];
+float4 _Disturbance[64];
 
 float wave(float2 position, float2 origin, float time)
 {

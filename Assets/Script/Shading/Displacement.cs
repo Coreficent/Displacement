@@ -37,7 +37,7 @@
         Shader shader;
 
         List<Disturbance> disturbances = new List<Disturbance>();
-        int disturbanceCount = 32;
+        int disturbanceCount = 64;
 
         Texture2D gradTexture;
         Material material;
