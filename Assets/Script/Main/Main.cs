@@ -15,18 +15,18 @@
         private readonly float waveSpeed = 1.25f;
 
         [SerializeField]
-        Shader shader;
+        private Shader shader;
 
-        List<Disturbance> disturbances = new List<Disturbance>();
-        int disturbanceCount = 64;
+        private List<Disturbance> disturbances = new List<Disturbance>();
+        private int disturbanceCount = 64;
 
-        Texture2D gradient;
-        Material material;
-        int count;
+        private Texture2D gradient;
+        private Material material;
+        private int count;
 
         private StepController stepController = new StepController();
 
-        Vector3 lastMousePosition;
+        private Vector3 lastMousePosition;
 
         public float WaveStrength
         {
