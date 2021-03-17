@@ -3,12 +3,16 @@
     using Coreficent.Main;
     using Coreficent.Shading;
     using Coreficent.Utility;
+    using UnityEngine.UI;
 
-    public class WaveControl : InterfaceControl
+    public class WaveControl : ReinforcedBehavior
     {
         public Main Main;
 
-        private Wave wave = new Wave();
+        public Slider WaveStrength;
+
+
+        private readonly Wave wave = new Wave();
 
         public void OnSelectWave(string waveType)
         {
@@ -44,6 +48,11 @@
                     DebugUtility.Warn("unexpected wave type");
                     break;
             }
+        }
+
+        public void OnSlide()
+        {
+            Main.WaveStrength = WaveStrength.value;
         }
     }
 }

@@ -8,8 +8,7 @@
 
     public class Main : ReinforcedBehavior
     {
-        [Range(0.01f, 1.0f)]
-        public float refractionStrength = 0.5f;
+        private float waveStrength = 0.5f;
 
         [Range(0.01f, 1.0f)]
         public float reflectionStrength = 0.7f;
@@ -31,6 +30,11 @@
 
         Vector3 lastMousePosition;
 
+        public float WaveStrength
+        {
+            set { waveStrength = value; }
+        }
+
         void UpdateShaderParameters()
         {
             var camera = GetComponent<Camera>();
@@ -46,7 +50,7 @@
 
             material.SetColor("_Reflection", Color.gray);
             material.SetVector("_Params1", new Vector4(camera.aspect, 1, 1 / waveSpeed, 0));
-            material.SetVector("_Params2", new Vector4(1, 1 / camera.aspect, refractionStrength, reflectionStrength));
+            material.SetVector("_Params2", new Vector4(1, 1 / camera.aspect, waveStrength, reflectionStrength));
         }
 
         protected override void Awake()
