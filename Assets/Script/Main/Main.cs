@@ -12,8 +12,7 @@
 
         private readonly float reflectionStrength = 0.2f;
 
-        [Range(0.01f, 3.0f)]
-        public float waveSpeed = 1.25f;
+        private readonly float waveSpeed = 1.25f;
 
         [SerializeField]
         Shader shader;
