@@ -7,15 +7,6 @@
 
     public class Main : ReinforcedBehavior
     {
-        public AnimationCurve Spike = new AnimationCurve(
-            new Keyframe(0.00f, 0.00f, 0, 0),
-            new Keyframe(0.49f, 0.00f, 0, 0),
-            new Keyframe(0.50f, 1.00f, 0, 0),
-            new Keyframe(0.51f, 0.00f, 0, 0),
-            new Keyframe(1.00f, 0.00f, 0, 0)
-        );
-
-
         [Range(0.01f, 1.0f)]
         public float refractionStrength = 0.5f;
 
@@ -27,8 +18,7 @@
         [Range(0.01f, 3.0f)]
         public float waveSpeed = 1.25f;
 
-        [Range(0.0f, 2.0f)]
-        public float interval = 0.5f;
+        private float interval = 0.05f;
 
         [SerializeField]
         Shader shader;
@@ -42,10 +32,6 @@
         int count;
 
         Vector3 lastMousePosition;
-
-
-        private Wave wave = new Wave();
-
 
         void UpdateShaderParameters()
         {
@@ -67,7 +53,7 @@
 
         protected override void Awake()
         {
-            UpdateParameters(wave.DiminishingSine);
+            UpdateParameters(new Wave().DiminishingSine);
         }
 
         public void UpdateParameters(AnimationCurve wave)
