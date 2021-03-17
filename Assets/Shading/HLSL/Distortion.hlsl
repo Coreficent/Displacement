@@ -9,7 +9,7 @@ float2 _MainTex_TexelSize;
 sampler2D _GradientTex;
 
 half4 _Reflection;
-float2 _Speed;
+float _Speed;
 float3 _Strength;
 
 int _DisturbanceCount;
@@ -37,7 +37,7 @@ float concat(float2 position)
 
 half4 frag(v2f_img i) : SV_Target
 {
-	float2 position = i.uv * _Speed.xy;
+	float2 position = i.uv * float2(_Speed, 1);
 
 	float distortion = concat(position);
 

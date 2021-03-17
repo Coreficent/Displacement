@@ -102,8 +102,8 @@
             material.SetVectorArray("_Disturbances", buffer);
 
             material.SetColor("_Reflection", Color.gray);
-            material.SetVector("_Speed", new Vector4(mainCamera.aspect, 1));
-            material.SetVector("_Strength", new Vector4(1, 1 / mainCamera.aspect, waveStrength));
+            material.SetFloat("_Speed", mainCamera.aspect);
+            material.SetVector("_Strength", new Vector3(1, 1 / mainCamera.aspect, waveStrength));
         }
     }
 }
