@@ -15,7 +15,7 @@ float4 _Strength;
 int _DisturbanceCount;
 float4 _Disturbances[64];
 
-float wave(float2 position, float2 origin, float time)
+float distort(float2 position, float2 origin, float time)
 {
 	float distance = length(position - origin);
 	float displacement = time - distance * _Speed.z;
@@ -28,7 +28,7 @@ float concat(float2 position)
 
 	for (int i = 0; i < _DisturbanceCount; ++i)
 	{
-		result += wave(position, _Disturbances[i].xy, _Disturbances[i].z);
+		result += distort(position, _Disturbances[i].xy, _Disturbances[i].z);
 	}
 
 	return result;
@@ -36,19 +36,19 @@ float concat(float2 position)
 
 half4 frag(v2f_img i) : SV_Target
 {
-	const float2 dx = float2(0.01f, 0);
-	const float2 dy = float2(0, 0.01f);
+	float2 position = i.uv * _Speed.xy;
 
-	float2 p = i.uv * _Speed.xy;
+	float distortion = concat(position);
 
-	float w = concat(p);
-	float2 dw = float2(concat(p + dx) - w, concat(p + dy) - w);
+	const float2 derivedX = float2(0.01f, 0);
+	const float2 derivedY = float2(0, 0.01f);
+	float2 derivedDistortion = float2(concat(position + derivedX) - distortion, concat(position + derivedY) - distortion);
 
-	float2 duv = dw * _Strength.xy * 0.2f * _Strength.z;
-	half4 c = tex2D(_MainTex, i.uv + duv);
-	float fr = pow(length(dw) * 3 * _Strength.w, 3);
+	float2 duv = derivedDistortion * _Strength.xy * 0.2f * _Strength.z;
+	half4 color = tex2D(_MainTex, i.uv + duv);
+	float finalDistance = pow(length(derivedDistortion) * 3 * _Strength.w, 3);
 
-	return lerp(c, _Reflection, fr);
+	return lerp(color, _Reflection, finalDistance);
 }
 
 #endif
