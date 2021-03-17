@@ -7,7 +7,13 @@
 
     public class Main : ReinforcedBehavior
     {
-        public AnimationCurve Temp;
+        public AnimationCurve Spike = new AnimationCurve(
+            new Keyframe(0.00f, 0.00f, 0, 0),
+            new Keyframe(0.49f, 0.00f, 0, 0),
+            new Keyframe(0.50f, 1.00f, 0, 0),
+            new Keyframe(0.51f, 0.00f, 0, 0),
+            new Keyframe(1.00f, 0.00f, 0, 0)
+        );
 
 
         [Range(0.01f, 1.0f)]

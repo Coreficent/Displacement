@@ -25,6 +25,21 @@
                 case "Constant":
                     Main.UpdateParameters(wave.Constant);
                     break;
+                case "Sine":
+                    Main.UpdateParameters(wave.Sine);
+                    break;
+                case "EaseIn":
+                    Main.UpdateParameters(wave.EaseIn);
+                    break;
+                case "EaseOut":
+                    Main.UpdateParameters(wave.EaseOut);
+                    break;
+                case "Step":
+                    Main.UpdateParameters(wave.Step);
+                    break;
+                case "Spike":
+                    Main.UpdateParameters(wave.Spike);
+                    break;
                 default:
                     DebugUtility.Warn("unexpected wave type");
                     break;
