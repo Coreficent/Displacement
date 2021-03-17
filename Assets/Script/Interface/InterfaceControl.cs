@@ -3,7 +3,6 @@
     using Coreficent.Utility;
     using UnityEngine;
 
-
     public class InterfaceControl : ReinforcedBehavior
     {
 

@@ -7,19 +7,6 @@
 
     public class Main : ReinforcedBehavior
     {
-        public AnimationCurve waveform = new AnimationCurve(
-            new Keyframe(0.00f, 0.50f, 0, 0),
-            new Keyframe(0.05f, 1.00f, 0, 0),
-            new Keyframe(0.15f, 0.10f, 0, 0),
-            new Keyframe(0.25f, 0.80f, 0, 0),
-            new Keyframe(0.35f, 0.30f, 0, 0),
-            new Keyframe(0.45f, 0.60f, 0, 0),
-            new Keyframe(0.55f, 0.40f, 0, 0),
-            new Keyframe(0.65f, 0.55f, 0, 0),
-            new Keyframe(0.75f, 0.46f, 0, 0),
-            new Keyframe(0.85f, 0.52f, 0, 0),
-            new Keyframe(0.99f, 0.50f, 0, 0)
-        );
 
         [Range(0.01f, 1.0f)]
         public float refractionStrength = 0.5f;
@@ -41,12 +28,16 @@
         List<Disturbance> disturbances = new List<Disturbance>();
         int disturbanceCount = 64;
 
-        Texture2D gradTexture;
+        Texture2D gradient;
         Material material;
         float timer;
         int count;
 
         Vector3 lastMousePosition;
+
+
+        private Wave wave = new Wave();
+
 
         void UpdateShaderParameters()
         {
@@ -68,25 +59,32 @@
 
         protected override void Awake()
         {
+            UpdateParameters(wave.DiminishingSineWave);
+        }
+
+        public void UpdateParameters(AnimationCurve waveType)
+        {
+            disturbances.Clear();
+
             for (var i = 0; i < disturbanceCount; ++i)
             {
                 disturbances.Add(new Disturbance());
             }
 
-            gradTexture = new Texture2D(2048, 1, TextureFormat.Alpha8, false);
-            gradTexture.wrapMode = TextureWrapMode.Clamp;
-            gradTexture.filterMode = FilterMode.Bilinear;
-            for (var i = 0; i < gradTexture.width; i++)
+            gradient = new Texture2D(2048, 1, TextureFormat.Alpha8, false);
+            gradient.wrapMode = TextureWrapMode.Clamp;
+            gradient.filterMode = FilterMode.Bilinear;
+            for (var i = 0; i < gradient.width; i++)
             {
-                var x = 1.0f / gradTexture.width * i;
-                var a = waveform.Evaluate(x);
-                gradTexture.SetPixel(i, 0, new Color(a, a, a, a));
+                var x = 1.0f / gradient.width * i;
+                var a = waveType.Evaluate(x);
+                gradient.SetPixel(i, 0, new Color(a, a, a, a));
             }
-            gradTexture.Apply();
+            gradient.Apply();
 
             material = new Material(shader);
             material.hideFlags = HideFlags.DontSave;
-            material.SetTexture("_GradTex", gradTexture);
+            material.SetTexture("_GradTex", gradient);
 
             UpdateShaderParameters();
         }
