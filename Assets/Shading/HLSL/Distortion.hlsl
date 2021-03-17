@@ -9,9 +9,8 @@ float2 _MainTex_TexelSize;
 sampler2D _GradientTex;
 
 half4 _Reflection;
-float4 _Speed;    // [ aspect, 1, scale, 0 ]
-float4 _Strength;    // [ 1, 1/aspect, refraction, reflection ]
-
+float4 _Speed;
+float4 _Strength;
 
 int _DisturbanceCount;
 float4 _Disturbance[64];
