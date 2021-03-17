@@ -4,13 +4,8 @@
 
     public class Disturbance
     {
-        Vector2 position;
-        float time;
-
-        public Disturbance()
-        {
-            time = 1000;
-        }
+        private Vector2 position = new Vector2();
+        private float time = 1000;
 
         public void Reset()
         {
@@ -24,7 +19,7 @@
             time += Time.deltaTime;
         }
 
-        public Vector4 MakeShaderParameter(float aspect)
+        public Vector4 CalculateShade(float aspect)
         {
             return new Vector4(position.x * aspect, position.y, time, 0);
         }

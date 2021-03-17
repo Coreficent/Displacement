@@ -19,7 +19,6 @@
         [Range(0.01f, 3.0f)]
         public float waveSpeed = 1.25f;
 
-
         [SerializeField]
         Shader shader;
 
@@ -41,7 +40,7 @@
             List<Vector4> buffer = new List<Vector4>();
             foreach (var disturbance in disturbances)
             {
-                buffer.Add(disturbance.MakeShaderParameter(camera.aspect));
+                buffer.Add(disturbance.CalculateShade(camera.aspect));
             }
 
             material.SetInt("_DisturbanceCount", buffer.Count);
@@ -93,9 +92,9 @@
                 stepController.Next();
             }
 
-            foreach (var d in disturbances)
+            foreach (var disturbance in disturbances)
             {
-                d.Update();
+                disturbance.Update();
             }
 
             UpdateShaderParameters();
