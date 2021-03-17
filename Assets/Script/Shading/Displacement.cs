@@ -1,9 +1,10 @@
 ﻿namespace Coreficent.Shading
 {
+    using Coreficent.Utility;
     using System.Collections.Generic;
     using UnityEngine;
 
-    public class Displacement : MonoBehaviour
+    public class Displacement : ReinforcedBehavior
     {
         public AnimationCurve waveform = new AnimationCurve(
             new Keyframe(0.00f, 0.50f, 0, 0),
@@ -64,7 +65,7 @@
             material.SetVector("_Params2", new Vector4(1, 1 / camera.aspect, refractionStrength, reflectionStrength));
         }
 
-        void Awake()
+        protected override void Awake()
         {
             for (var i = 0; i < disturbanceCount; ++i)
             {

@@ -1,8 +1,8 @@
 ﻿namespace Coreficent.Main
 {
-    using UnityEngine;
+    using Coreficent.Utility;
 
-    public class Main : MonoBehaviour
+    public class Main : ReinforcedBehavior
     {
 
     }
