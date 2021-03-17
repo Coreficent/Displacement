@@ -15,7 +15,7 @@
 
         public void SelectPreset(int index)
         {
-
+            DebugUtility.Bug("select", index);
         }
 
         public void Slide()
