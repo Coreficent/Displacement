@@ -8,25 +8,25 @@
 
     public class Main : ReinforcedBehavior
     {
-        private float waveStrength = 0.5f;
-
-        private readonly float reflectionStrength = 0.2f;
-
-        private readonly float waveSpeed = 1.25f;
-
         [SerializeField]
         private Shader shader;
 
-        private List<Disturbance> disturbances = new List<Disturbance>();
+        [SerializeField]
+        private Camera mainCamera;
+
+        private readonly float waveSpeed = 1.25f;
+        private readonly float reflectionStrength = 0.2f;
+
         private int disturbanceCount = 64;
-
-        private Texture2D gradient;
-        private Material material;
         private int count;
-
-        private StepController stepController = new StepController();
+        private float waveStrength = 0.5f;
 
         private Vector3 lastMousePosition;
+
+        private Texture2D gradient;
+        private StepController stepController = new StepController();
+        private Material material;
+        private List<Disturbance> disturbances = new List<Disturbance>();
 
         public float WaveStrength
         {
@@ -35,20 +35,18 @@
 
         void UpdateShaderParameters()
         {
-            var camera = GetComponent<Camera>();
-
             List<Vector4> buffer = new List<Vector4>();
             foreach (var disturbance in disturbances)
             {
-                buffer.Add(disturbance.CalculateShade(camera.aspect));
+                buffer.Add(disturbance.CalculateShade(mainCamera.aspect));
             }
 
             material.SetInt("_DisturbanceCount", buffer.Count);
             material.SetVectorArray("_Disturbance", buffer);
 
             material.SetColor("_Reflection", Color.gray);
-            material.SetVector("_Params1", new Vector4(camera.aspect, 1, 1 / waveSpeed, 0));
-            material.SetVector("_Params2", new Vector4(1, 1 / camera.aspect, waveStrength, reflectionStrength));
+            material.SetVector("_Params1", new Vector4(mainCamera.aspect, 1, 1 / waveSpeed, 0));
+            material.SetVector("_Params2", new Vector4(1, 1 / mainCamera.aspect, waveStrength, reflectionStrength));
         }
 
         protected override void Awake()

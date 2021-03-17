@@ -1047,10 +1047,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de00a52b44b320546a53db95706c027d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  refractionStrength: 0.5
-  reflectionStrength: 0.2
-  waveSpeed: 0.5
   shader: {fileID: 4800000, guid: 162fe242d486f4dab90ed53db15b9c19, type: 3}
+  mainCamera: {fileID: 963194227}
 --- !u!1 &1000846746
 GameObject:
   m_ObjectHideFlags: 0
