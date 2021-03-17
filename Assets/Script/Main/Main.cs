@@ -14,8 +14,8 @@
         [SerializeField]
         private Camera mainCamera;
 
-        private readonly float waveSpeed = 0.2f;
-        private readonly float reflectionStrength = 0.2f;
+        private readonly float waveSpeed = 0.25f;
+        private readonly float reflectionStrength = 0.15f;
 
         private readonly int disturbanceCount = 64;
         private int disturbanceIndex = 0;
@@ -100,7 +100,7 @@
             }
 
             material.SetInt("_DisturbanceCount", buffer.Count);
-            material.SetVectorArray("_Disturbance", buffer);
+            material.SetVectorArray("_Disturbances", buffer);
 
             material.SetColor("_Reflection", Color.gray);
             material.SetVector("_Speed", new Vector4(mainCamera.aspect, 1, 1 / waveSpeed, 0));

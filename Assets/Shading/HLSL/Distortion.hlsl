@@ -13,22 +13,22 @@ float4 _Speed;
 float4 _Strength;
 
 int _DisturbanceCount;
-float4 _Disturbance[64];
+float4 _Disturbances[64];
 
 float wave(float2 position, float2 origin, float time)
 {
-	float d = length(position - origin);
-	float t = time - d * _Speed.z;
-	return (tex2D(_GradientTex, float2(t, 0)).a - 0.5f) * 2;
+	float distance = length(position - origin);
+	float displacement = time - distance * _Speed.z;
+	return (tex2D(_GradientTex, float2(displacement, 0)).a - 0.5f) * 2;
 }
 
-float allwave(float2 position)
+float concat(float2 position)
 {
 	float result = 0.0;
 
 	for (int i = 0; i < _DisturbanceCount; ++i)
 	{
-		result += wave(position, _Disturbance[i].xy, _Disturbance[i].z);
+		result += wave(position, _Disturbances[i].xy, _Disturbances[i].z);
 	}
 
 	return result;
@@ -41,8 +41,8 @@ half4 frag(v2f_img i) : SV_Target
 
 	float2 p = i.uv * _Speed.xy;
 
-	float w = allwave(p);
-	float2 dw = float2(allwave(p + dx) - w, allwave(p + dy) - w);
+	float w = concat(p);
+	float2 dw = float2(concat(p + dx) - w, concat(p + dy) - w);
 
 	float2 duv = dw * _Strength.xy * 0.2f * _Strength.z;
 	half4 c = tex2D(_MainTex, i.uv + duv);
