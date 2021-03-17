@@ -46,8 +46,8 @@
             material.SetVectorArray("_Disturbance", buffer);
 
             material.SetColor("_Reflection", Color.gray);
-            material.SetVector("_Params1", new Vector4(mainCamera.aspect, 1, 1 / waveSpeed, 0));
-            material.SetVector("_Params2", new Vector4(1, 1 / mainCamera.aspect, waveStrength, reflectionStrength));
+            material.SetVector("_Speed", new Vector4(mainCamera.aspect, 1, 1 / waveSpeed, 0));
+            material.SetVector("_Strength", new Vector4(1, 1 / mainCamera.aspect, waveStrength, reflectionStrength));
         }
 
         protected override void Awake()
