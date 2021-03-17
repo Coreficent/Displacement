@@ -9,8 +9,8 @@ float2 _MainTex_TexelSize;
 sampler2D _GradientTex;
 
 half4 _Reflection;
-float4 _Speed;
-float4 _Strength;
+float2 _Speed;
+float3 _Strength;
 
 int _DisturbanceCount;
 float4 _Disturbances[64];
@@ -18,7 +18,8 @@ float4 _Disturbances[64];
 float distort(float2 position, float2 origin, float time)
 {
 	float distance = length(position - origin);
-	float displacement = time - distance * _Speed.z;
+	float speed = 0.25;
+	float displacement = time - distance / speed;
 	return (tex2D(_GradientTex, float2(displacement, 0)).a - 0.5f) * 2;
 }
 
@@ -46,7 +47,8 @@ half4 frag(v2f_img i) : SV_Target
 
 	float2 derivedUV = derivedDistortion * _Strength.xy * 0.2f * _Strength.z;
 	half4 color = tex2D(_MainTex, i.uv + derivedUV);
-	float finalDistance = pow(length(derivedDistortion) * 2 * _Strength.w, 2);
+	float reflection = 0.15;
+	float finalDistance = pow(length(derivedDistortion) * 2 * reflection, 2);
 
 	return lerp(color, _Reflection, finalDistance);
 }

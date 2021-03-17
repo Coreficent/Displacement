@@ -15,7 +15,6 @@
         private Camera mainCamera;
 
         private readonly float waveSpeed = 0.25f;
-        private readonly float reflectionStrength = 0.15f;
 
         private List<Disturbance> disturbances = new List<Disturbance>();
         private readonly int disturbanceCount = 64;
@@ -103,8 +102,8 @@
             material.SetVectorArray("_Disturbances", buffer);
 
             material.SetColor("_Reflection", Color.gray);
-            material.SetVector("_Speed", new Vector4(mainCamera.aspect, 1, 1 / waveSpeed, 0));
-            material.SetVector("_Strength", new Vector4(1, 1 / mainCamera.aspect, waveStrength, reflectionStrength));
+            material.SetVector("_Speed", new Vector4(mainCamera.aspect, 1));
+            material.SetVector("_Strength", new Vector4(1, 1 / mainCamera.aspect, waveStrength));
         }
     }
 }
