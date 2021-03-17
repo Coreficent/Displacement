@@ -14,7 +14,7 @@
         [SerializeField]
         private Camera mainCamera;
 
-        private readonly float waveSpeed = 0.25f;
+        private readonly float waveSpeed = 0.2f;
         private readonly float reflectionStrength = 0.2f;
 
         private readonly int disturbanceCount = 64;
@@ -77,7 +77,7 @@
 
             material = new Material(shader);
             material.hideFlags = HideFlags.DontSave;
-            material.SetTexture("_GradTex", gradient);
+            material.SetTexture("_GradientTex", gradient);
 
             UpdateShaderParameters();
         }

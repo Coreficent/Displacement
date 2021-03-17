@@ -3,7 +3,7 @@
     Properties
     {
         _MainTex("Base", 2D) = "white" {}
-        _GradTex("Gradient", 2D) = "white" {}
+        _GradientTex("Gradient", 2D) = "white" {}
         _Reflection("Reflection Color", Color) = (0, 0, 0, 0)
         _Params1("Parameters 1", Vector) = (1, 1, 0.8, 0)
         _Params2("Parameters 2", Vector) = (1, 1, 1, 0)

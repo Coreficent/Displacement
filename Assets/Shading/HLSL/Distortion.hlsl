@@ -6,7 +6,7 @@
 sampler2D _MainTex;
 float2 _MainTex_TexelSize;
 
-sampler2D _GradTex;
+sampler2D _GradientTex;
 
 half4 _Reflection;
 float4 _Params1;    // [ aspect, 1, scale, 0 ]
@@ -20,7 +20,7 @@ float wave(float2 position, float2 origin, float time)
 {
 	float d = length(position - origin);
 	float t = time - d * _Params1.z;
-	return (tex2D(_GradTex, float2(t, 0)).a - 0.5f) * 2;
+	return (tex2D(_GradientTex, float2(t, 0)).a - 0.5f) * 2;
 }
 
 float allwave(float2 position)
