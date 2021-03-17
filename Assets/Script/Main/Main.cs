@@ -11,8 +11,6 @@
         [Range(0.01f, 1.0f)]
         public float refractionStrength = 0.5f;
 
-        public Color reflectionColor = Color.gray;
-
         [Range(0.01f, 1.0f)]
         public float reflectionStrength = 0.7f;
 
@@ -46,7 +44,7 @@
             material.SetInt("_DisturbanceCount", buffer.Count);
             material.SetVectorArray("_Disturbance", buffer);
 
-            material.SetColor("_Reflection", reflectionColor);
+            material.SetColor("_Reflection", Color.gray);
             material.SetVector("_Params1", new Vector4(camera.aspect, 1, 1 / waveSpeed, 0));
             material.SetVector("_Params2", new Vector4(1, 1 / camera.aspect, refractionStrength, reflectionStrength));
         }
