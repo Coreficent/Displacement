@@ -1,11 +1,10 @@
 ﻿namespace Coreficent.Shading
 {
-    using Coreficent.Utility;
     using UnityEngine;
 
     public class Wave
     {
-        public AnimationCurve DiminishingSine = new AnimationCurve(
+        public readonly AnimationCurve DiminishingSine = new AnimationCurve(
             new Keyframe(0.00f, 0.50f, 0, 0),
             new Keyframe(0.05f, 1.00f, 0, 0),
             new Keyframe(0.15f, 0.10f, 0, 0),
@@ -19,17 +18,17 @@
             new Keyframe(0.99f, 0.50f, 0, 0)
         );
 
-        public AnimationCurve Linear = new AnimationCurve(
+        public readonly AnimationCurve Linear = new AnimationCurve(
             new Keyframe(0.0f, 0.0f, 0, 0),
             new Keyframe(1.0f, 1.0f, 0, 0)
             );
 
-        public AnimationCurve Constant = new AnimationCurve(
+        public readonly AnimationCurve Constant = new AnimationCurve(
             new Keyframe(1.0f, 1.0f, 0, 0),
             new Keyframe(1.0f, 1.0f, 0, 0)
             );
 
-        public AnimationCurve Sine = new AnimationCurve(
+        public readonly AnimationCurve Sine = new AnimationCurve(
             new Keyframe(0.0f, 0.50f, 0, 0),
             new Keyframe(0.1f, 1.00f, 0, 0),
             new Keyframe(0.2f, 0.50f, 0, 0),
@@ -43,19 +42,19 @@
             new Keyframe(1.0f, 0.50f, 0, 0)
         );
 
-        public AnimationCurve EaseIn = new AnimationCurve(
+        public readonly AnimationCurve EaseIn = new AnimationCurve(
             new Keyframe(0.00f, 0.00f, 0, 0),
             new Keyframe(0.25f, 0.00f, 0, 0),
             new Keyframe(1.00f, 1.00f, 0, 0)
         );
 
-        public AnimationCurve EaseOut = new AnimationCurve(
+        public readonly AnimationCurve EaseOut = new AnimationCurve(
             new Keyframe(0.00f, 0.00f, 0, 0),
             new Keyframe(0.75f, 1.00f, 0, 0),
             new Keyframe(1.00f, 1.00f, 0, 0)
         );
 
-        public AnimationCurve Step = new AnimationCurve(
+        public readonly AnimationCurve Step = new AnimationCurve(
             new Keyframe(0.00f, 0.00f, 0, 0),
             new Keyframe(0.24f, 0.00f, 0, 0),
             new Keyframe(0.25f, 1.00f, 0, 0),
@@ -64,7 +63,7 @@
             new Keyframe(1.00f, 0.00f, 0, 0)
         );
 
-        public AnimationCurve Spike = new AnimationCurve(
+        public readonly AnimationCurve Spike = new AnimationCurve(
             new Keyframe(0.00f, 0.00f, 0, 0),
             new Keyframe(0.49f, 0.00f, 0, 0),
             new Keyframe(0.50f, 1.00f, 0, 0),

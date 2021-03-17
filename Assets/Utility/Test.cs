@@ -1,12 +1,10 @@
 ﻿namespace Coreficent.Utility
 {
-    using System.Linq;
     using Coreficent.Setting;
-    using System;
     using System.Collections;
-    using System.Collections.Generic;
     using UnityEngine;
-    public class DebugUtility
+
+    public class Test
     {
         private static readonly string _delimiter = "::";
         private static readonly string _ender = ".";
@@ -71,6 +69,10 @@
                     {
                         message += "null";
                     }
+                    else if ("".Equals(i))
+                    {
+                        message += "empty string";
+                    }
                     else
                     {
                         if (i.GetType().GetInterface(nameof(ICollection)) != null)
@@ -83,7 +85,6 @@
                                 message += item;
                                 message += ",";
                             }
-                            //message += string.Join(",", enumerable);
 
                             message += "]";
                         }

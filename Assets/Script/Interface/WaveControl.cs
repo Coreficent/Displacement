@@ -8,15 +8,12 @@
     public class WaveControl : ReinforcedBehavior
     {
         public Main Main;
-
         public Slider WaveStrength;
 
         private readonly Wave wave = new Wave();
 
         public void OnSelectWave(string waveType)
         {
-            DebugUtility.Bug("select wave", waveType);
-
             switch (waveType)
             {
                 case "DeminishingSine":
@@ -44,7 +41,7 @@
                     Main.UpdateParameters(wave.Spike);
                     break;
                 default:
-                    DebugUtility.Warn("unexpected wave type");
+                    Test.Warn("unexpected wave type");
                     break;
             }
         }
