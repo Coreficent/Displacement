@@ -5,7 +5,7 @@
     public class Disturbance
     {
         private Vector2 position = new Vector2();
-        private float time = 1000;
+        private float time = 1000.0f;
 
         public void Reset()
         {

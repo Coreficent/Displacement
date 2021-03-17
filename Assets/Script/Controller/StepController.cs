@@ -4,7 +4,7 @@
 
     public class StepController
     {
-        private float frequency = 0.05f;
+        private float frequency = 0.15f;
         private float currentTime = 0.0f;
 
         public void Update()

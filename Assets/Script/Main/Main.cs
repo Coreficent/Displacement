@@ -17,15 +17,17 @@
         private readonly float waveSpeed = 0.25f;
         private readonly float reflectionStrength = 0.2f;
 
-        private int disturbanceCount = 64;
-        private int count;
+        private readonly int disturbanceCount = 64;
+        private int disturbanceIndex = 0;
         private float waveStrength = 0.5f;
 
-        private Texture2D gradient;
-        private StepController stepController = new StepController();
-        private Material material;
+        private readonly StepController stepController = new StepController();
         private List<Disturbance> disturbances = new List<Disturbance>();
         private readonly MouseController mouseController = new MouseController();
+
+        private Texture2D gradient;
+        private Material material;
+
 
         public float WaveStrength
         {
@@ -82,13 +84,11 @@
 
         void Update()
         {
-            stepController.Update();
             while (stepController.HasNext())
             {
                 if (mouseController.MouseChanged())
                 {
-                    disturbances[count++ % disturbances.Count].Reset();
-                    mouseController.Update();
+                    disturbances[disturbanceIndex++ % disturbances.Count].Reset();
                 }
                 stepController.Next();
             }
@@ -98,6 +98,8 @@
                 disturbance.Update();
             }
 
+            stepController.Update();
+            mouseController.Update();
             UpdateShaderParameters();
         }
 
