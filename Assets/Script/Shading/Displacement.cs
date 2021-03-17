@@ -44,6 +44,8 @@
         float timer;
         int count;
 
+        Vector3 lastMousePosition;
+
         void UpdateShaderParameters()
         {
             var camera = GetComponent<Camera>();
@@ -111,7 +113,11 @@
 
         public void Emit()
         {
-            disturbances[count++ % disturbances.Count].Reset();
+            if (Input.mousePosition != lastMousePosition)
+            {
+                disturbances[count++ % disturbances.Count].Reset();
+            }
+            lastMousePosition = Input.mousePosition;
         }
     }
 }
