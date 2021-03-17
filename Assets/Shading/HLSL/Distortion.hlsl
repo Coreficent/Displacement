@@ -9,8 +9,8 @@ float2 _MainTex_TexelSize;
 sampler2D _GradientTex;
 
 half4 _Reflection;
-float _Speed;
-float3 _Strength;
+float _Aspect;
+float _Strength;
 
 int _DisturbanceCount;
 float4 _Disturbances[64];
@@ -18,14 +18,14 @@ float4 _Disturbances[64];
 float distort(float2 position, float2 origin, float time)
 {
 	float distance = length(position - origin);
-	float speed = 0.25;
+	float speed = 0.25f;
 	float displacement = time - distance / speed;
-	return (tex2D(_GradientTex, float2(displacement, 0)).a - 0.5f) * 2;
+	return (tex2D(_GradientTex, float2(displacement, 0.0f)).a - 0.5f) * 2.0f;
 }
 
 float concat(float2 position)
 {
-	float result = 0.0;
+	float result = 0.0f;
 
 	for (int i = 0; i < _DisturbanceCount; ++i)
 	{
@@ -37,18 +37,18 @@ float concat(float2 position)
 
 half4 frag(v2f_img i) : SV_Target
 {
-	float2 position = i.uv * float2(_Speed, 1);
+	float2 position = i.uv * float2(_Aspect, 1);
 
 	float distortion = concat(position);
 
-	const float2 derivedX = float2(0.01f, 0);
-	const float2 derivedY = float2(0, 0.01f);
+	const float2 derivedX = float2(0.01f, 0.0f);
+	const float2 derivedY = float2(0.0f, 0.01f);
 	float2 derivedDistortion = float2(concat(position + derivedX) - distortion, concat(position + derivedY) - distortion);
 
-	float2 derivedUV = derivedDistortion * _Strength.xy * 0.2f * _Strength.z;
+	float2 derivedUV = derivedDistortion * float2(1.0f, 1.0f/ _Aspect) * 0.2f * _Strength;
 	half4 color = tex2D(_MainTex, i.uv + derivedUV);
-	float reflection = 0.15;
-	float finalDistance = pow(length(derivedDistortion) * 2 * reflection, 2);
+	float reflection = 0.15f;
+	float finalDistance = pow(length(derivedDistortion) * 2.0f * reflection, 2.0f);
 
 	return lerp(color, _Reflection, finalDistance);
 }
