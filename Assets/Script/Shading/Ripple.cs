@@ -2,7 +2,7 @@
 {
     using UnityEngine;
 
-    public class Wave
+    public class Ripple
     {
         public readonly AnimationCurve DiminishingSine = new AnimationCurve(
             new Keyframe(0.00f, 0.50f, 0, 0),

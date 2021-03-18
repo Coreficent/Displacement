@@ -10,35 +10,35 @@
         public Main Main;
         public Slider WaveStrength;
 
-        private readonly Wave wave = new Wave();
+        private readonly Ripple wave = new Ripple();
 
         public void OnSelectWave(string waveType)
         {
             switch (waveType)
             {
                 case "DeminishingSine":
-                    Main.UpdateParameters(wave.DiminishingSine);
+                    Main.UpdateShader(wave.DiminishingSine);
                     break;
                 case "Linear":
-                    Main.UpdateParameters(wave.Linear);
+                    Main.UpdateShader(wave.Linear);
                     break;
                 case "Constant":
-                    Main.UpdateParameters(wave.Constant);
+                    Main.UpdateShader(wave.Constant);
                     break;
                 case "Sine":
-                    Main.UpdateParameters(wave.Sine);
+                    Main.UpdateShader(wave.Sine);
                     break;
                 case "EaseIn":
-                    Main.UpdateParameters(wave.EaseIn);
+                    Main.UpdateShader(wave.EaseIn);
                     break;
                 case "EaseOut":
-                    Main.UpdateParameters(wave.EaseOut);
+                    Main.UpdateShader(wave.EaseOut);
                     break;
                 case "Step":
-                    Main.UpdateParameters(wave.Step);
+                    Main.UpdateShader(wave.Step);
                     break;
                 case "Spike":
-                    Main.UpdateParameters(wave.Spike);
+                    Main.UpdateShader(wave.Spike);
                     break;
                 default:
                     Test.Warn("unexpected wave type");

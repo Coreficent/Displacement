@@ -32,7 +32,7 @@
 
         protected override void Awake()
         {
-            UpdateParameters(new Wave().DiminishingSine);
+            UpdateShader(new Ripple().DiminishingSine);
         }
 
         protected void Update()
@@ -53,7 +53,7 @@
 
             stepController.Update();
             mouseController.Update();
-            UpdateShaderParameters();
+            UploadToShader();
         }
 
         protected void OnRenderImage(RenderTexture source, RenderTexture destination)
@@ -61,7 +61,7 @@
             Graphics.Blit(source, destination, material);
         }
 
-        public void UpdateParameters(AnimationCurve wave)
+        public void UpdateShader(AnimationCurve wave)
         {
             disturbances.Clear();
 
@@ -85,10 +85,10 @@
             material.hideFlags = HideFlags.DontSave;
             material.SetTexture("_GradientTex", gradient);
 
-            UpdateShaderParameters();
+            UploadToShader();
         }
 
-        private void UpdateShaderParameters()
+        private void UploadToShader()
         {
             List<Vector4> buffer = new List<Vector4>();
             foreach (var disturbance in disturbances)
