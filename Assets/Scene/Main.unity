@@ -2101,7 +2101,7 @@ GameObject:
   - component: {fileID: 1675511913}
   - component: {fileID: 1675511914}
   m_Layer: 5
-  m_Name: WaveStrength
+  m_Name: RippleStrength
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -5,7 +5,7 @@
     using Coreficent.Utility;
     using UnityEngine.UI;
 
-    public class WaveControl : ReinforcedBehavior
+    public class RippleControl : ReinforcedBehavior
     {
         public Main Main;
         public Slider WaveStrength;
@@ -45,7 +45,7 @@
                     break;
             }
         }
-        
+
         public void OnSlide()
         {
             Main.WaveStrength = WaveStrength.value;
