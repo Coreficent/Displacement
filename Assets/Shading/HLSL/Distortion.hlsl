@@ -12,21 +12,20 @@ float _Strength;
 int _DisturbanceCount;
 float4 _Disturbances[64];
 
-float distort(float2 position, float2 origin, float time)
-{
-	float distance = length(position - origin);
-	float speed = 0.25f;
-	float displacement = time - distance / speed;
-	return (tex2D(_GradientTex, float2(displacement, 0.0f)).a - 0.5f) * 2.0f;
-}
-
 float concat(float2 position)
 {
 	float result = 0.0f;
 
 	for (int i = 0; i < _DisturbanceCount; ++i)
 	{
-		result += distort(position, _Disturbances[i].xy, _Disturbances[i].z);
+		float2 origin = _Disturbances[i].xy;
+		float time = _Disturbances[i].z;
+		float distance = length(position - origin);
+		float speed = 0.25f;
+		float displacement = time - distance / speed;
+		float distort = (tex2D(_GradientTex, float2(displacement, 0.0f)).a - 0.5f) * 2.0f;
+
+		result += distort;
 	}
 
 	return result;
