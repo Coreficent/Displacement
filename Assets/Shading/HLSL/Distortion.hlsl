@@ -12,6 +12,10 @@ float _Strength;
 int _DisturbanceCount;
 float4 _Disturbances[64];
 
+/*
+* calculates a high map as a function of the origin and the current position based on the input wave function.
+*/
+
 float concat(float2 position)
 {
 	float result = 0.0f;
@@ -30,6 +34,10 @@ float concat(float2 position)
 
 	return result;
 }
+
+/*
+* converts the height map after the concatenation to a displacement map to create the ripple effect. 
+*/
 
 half4 frag(v2f_img i) : SV_Target
 {

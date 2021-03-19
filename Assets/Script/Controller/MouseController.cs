@@ -2,6 +2,10 @@
 {
     using UnityEngine;
 
+    /*
+     * determines the mouse position
+     */
+
     public class MouseController
     {
         private Vector3 lastMousePosition = new Vector3();

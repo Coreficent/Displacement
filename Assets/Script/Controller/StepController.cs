@@ -2,6 +2,10 @@
 {
     using UnityEngine;
 
+    /*
+     * controls time
+     */
+
     public class StepController
     {
         private readonly float frequency = 0.15f;

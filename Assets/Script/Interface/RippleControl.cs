@@ -5,6 +5,10 @@
     using Coreficent.Utility;
     using UnityEngine.UI;
 
+    /*
+     * controls the wave function input presets
+     */
+
     public class RippleControl : ReinforcedBehavior
     {
         public Main Main;

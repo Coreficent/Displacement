@@ -2,6 +2,10 @@
 {
     using UnityEngine;
 
+    /*
+     * an abstraction for displacement
+     */
+
     public class Disturbance
     {
         private Vector2 position = new Vector2();

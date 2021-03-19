@@ -6,6 +6,10 @@
     using System.Collections.Generic;
     using UnityEngine;
 
+    /*
+     * the main entry of the program
+     */
+
     public class Main : ReinforcedBehavior
     {
         [SerializeField]

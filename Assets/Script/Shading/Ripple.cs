@@ -2,6 +2,10 @@
 {
     using UnityEngine;
 
+    /*
+     * wave function presets 
+     */
+
     public class Ripple
     {
         public readonly AnimationCurve DiminishingSine = new AnimationCurve(
