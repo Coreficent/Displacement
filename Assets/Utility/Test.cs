@@ -93,8 +93,6 @@
                             message += i;
                         }
                     }
-
-
                 }
 
                 switch (messageType)

@@ -15,12 +15,11 @@
         private Camera mainCamera;
 
         private List<Disturbance> disturbances = new List<Disturbance>();
+        private readonly StepController stepController = new StepController();
+        private readonly MouseController mouseController = new MouseController();
         private readonly int disturbanceCount = 64;
         private int disturbanceIndex = 0;
         private float waveStrength = 0.5f;
-
-        private readonly StepController stepController = new StepController();
-        private readonly MouseController mouseController = new MouseController();
 
         private Texture2D gradient;
         private Material material;
@@ -30,7 +29,7 @@
             set { waveStrength = value; }
         }
 
-        protected override void Awake()
+        protected virtual void Start()
         {
             UpdateShader(new Ripple().DiminishingSine);
         }
@@ -73,12 +72,14 @@
             gradient = new Texture2D(2048, 1, TextureFormat.Alpha8, false);
             gradient.wrapMode = TextureWrapMode.Clamp;
             gradient.filterMode = FilterMode.Bilinear;
+
             for (var i = 0; i < gradient.width; ++i)
             {
                 float positionX = 1.0f / gradient.width * i;
                 float positionY = wave.Evaluate(positionX);
                 gradient.SetPixel(i, 0, new Color(positionY, positionY, positionY, positionY));
             }
+
             gradient.Apply();
 
             material = new Material(shader);
@@ -91,6 +92,7 @@
         private void UploadToShader()
         {
             List<Vector4> buffer = new List<Vector4>();
+
             foreach (var disturbance in disturbances)
             {
                 buffer.Add(disturbance.CalculateShade(mainCamera.aspect));

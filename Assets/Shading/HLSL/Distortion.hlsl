@@ -4,8 +4,6 @@
 #include "UnityCG.cginc"
 
 sampler2D _MainTex;
-float2 _MainTex_TexelSize;
-
 sampler2D _GradientTex;
 
 float _Aspect;

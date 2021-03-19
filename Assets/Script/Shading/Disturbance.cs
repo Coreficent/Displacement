@@ -21,7 +21,7 @@
 
         public Vector4 CalculateShade(float aspect)
         {
-            return new Vector4(position.x * aspect, position.y, time, 0);
+            return new Vector4(position.x * aspect, position.y, time, 0.0f);
         }
     }
 }
