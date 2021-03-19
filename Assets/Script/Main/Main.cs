@@ -66,7 +66,7 @@
 
             for (var i = 0; i < disturbanceCount; ++i)
             {
-                disturbances.Add(new Disturbance());
+                disturbances.Add(new Disturbance(mainCamera.aspect));
             }
 
             gradient = new Texture2D(2048, 1, TextureFormat.Alpha8, false);
@@ -95,7 +95,7 @@
 
             foreach (var disturbance in disturbances)
             {
-                buffer.Add(disturbance.CalculateShade(mainCamera.aspect));
+                buffer.Add(disturbance.CalculateShade());
             }
 
             material.SetInt("_DisturbanceCount", buffer.Count);
