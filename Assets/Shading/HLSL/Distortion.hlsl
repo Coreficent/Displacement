@@ -34,15 +34,16 @@ float concat(float2 position)
 half4 frag(v2f_img i) : SV_Target
 {
 	float2 position = i.uv * float2(_Aspect, 1.0f);
-
 	float distortion = concat(position);
 
-	const float2 derivedX = float2(0.01f, 0.0f);
-	const float2 derivedY = float2(0.0f, 0.01f);
-	float2 derivedDistortion = float2(concat(position + derivedX) - distortion, concat(position + derivedY) - distortion);
+	float2 derivedX = float2(0.01f, 0.0f);
+	float2 derivedY = float2(0.0f, 0.01f);
 
+	float2 derivedDistortion = float2(concat(position + derivedX) - distortion, concat(position + derivedY) - distortion);
 	float2 derivedUV = derivedDistortion * float2(1.0f, 1.0f/ _Aspect) * 0.2f * _Strength;
+
 	half4 color = tex2D(_MainTex, i.uv + derivedUV);
+
 	float reflection = 0.15f;
 	float finalDistance = pow(length(derivedDistortion) * 2.0f * reflection, 2.0f);
 
